@@ -1,0 +1,47 @@
+<table align="center" border="2">
+<form action="{% url 'savefooditems' %}", method="post">
+    {% csrf_token %}
+    <tr><th>{{ foodform.as_p }}</th>
+        <th>
+        <table align="center" border="2">
+            <tr><th>Item No</th>
+                <th> Item Name</th>
+                <th>Price</th></tr>
+            {% for x in data %}
+                <tr><th>{{x.ino }}</th>
+                <th> {{ x.name }}</th>
+                <th>{{ x.price }}</th>
+            {% endfor %}
+            </tr>
+    </table></th></tr>
+    <th><button type="submit">Save</button></th>
+    </th><th>{% for x in messages %}{{ x }}{% endfor %}</th></tr>
+</form>
+    <form action="{% url 'savecust' %}" method="post">
+        {% csrf_token %}
+        <tr><th>{{ custform.as_p }}</th>
+
+         <th>
+        <table align="center" border="2">
+            <tr><th>Customer No</th>
+                <th> Customer Name</th>
+                <th>Contact Number</th>
+                <th>Selected Items</th></tr>
+            {% for x in data2 %}
+                <tr><th>{{x.cno }}</th>
+                <th> {{ x.cname }}</th>
+                <th>{{ x.contactno }}</th>
+                <th>
+                {% for y in x.foodid.all %}
+                {{ y }}<br>
+                    {% endfor %}
+                </th>
+
+            {% endfor %}
+            </tr>
+        </table></th></tr>
+        <tr><th><button type="submit">Save</button></th>
+
+
+    </form>
+</table>
